@@ -97,7 +97,7 @@ public class ConcurrentProducer {
 /**
  * @description  User Entity
  * @author atong
- * @date 19:16 2021/6/19
+ * @date 19:43 2021/6/19
  * @version 1.0.0.1
  **/
 @Data
