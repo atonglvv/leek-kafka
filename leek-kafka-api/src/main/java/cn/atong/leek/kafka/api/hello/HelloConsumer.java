@@ -1,5 +1,6 @@
 package cn.atong.leek.kafka.api.hello;
 
+import cn.atong.leek.kafka.api.KafkaConst;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
@@ -31,7 +32,7 @@ public class HelloConsumer {
 
         try {
             //消费者订阅主题, 可以订阅多个
-            consumer.subscribe(Collections.singleton("HelloTopic"));
+            consumer.subscribe(Collections.singleton(KafkaConst.HELLO_TOPIC));
             while (true) {
                 // 拉取消息
                 ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(500));

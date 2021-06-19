@@ -1,5 +1,6 @@
 package cn.atong.leek.kafka.api.hello;
 
+import cn.atong.leek.kafka.api.KafkaConst;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 
@@ -26,7 +27,7 @@ public class HelloProducer {
             try{
                 //发送四条消息
                 for (int i = 0; i < 6; i++) {
-                    record = new ProducerRecord<String, String>("HelloTopic", String.valueOf(i), "hello kafka");
+                    record = new ProducerRecord<String, String>(KafkaConst.HELLO_TOPIC, String.valueOf(i), "hello kafka");
                     //三种发送方式之一 : 简单发送, 发送即忘, 会有重试
                     producer.send(record);
                     System.out.println("发送第" + i + "条消息...");
