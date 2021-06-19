@@ -21,7 +21,7 @@ public class KafkaConst {
             Class<? extends Serializer> keySerializeClazz,
             Class<? extends Serializer> valueSerializeClazz) {
         Properties properties = new Properties();
-        properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,LOCAL_BROKER);
+        properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, LOCAL_BROKER);
         properties.put( ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG , keySerializeClazz);
         properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG , valueSerializeClazz);
         return properties;
