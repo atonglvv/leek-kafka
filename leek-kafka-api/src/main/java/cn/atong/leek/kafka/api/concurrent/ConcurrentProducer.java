@@ -1,9 +1,7 @@
 package cn.atong.leek.kafka.api.concurrent;
 
 import cn.atong.leek.kafka.api.KafkaConst;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import cn.atong.leek.kafka.api.domain.User;
 import org.apache.kafka.clients.producer.Callback;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
@@ -91,19 +89,4 @@ public class ConcurrentProducer {
             executorService.shutdown();
         }
     }
-}
-
-
-/**
- * @description  User Entity
- * @author atong
- * @date 19:43 2021/6/19
- * @version 1.0.0.1
- **/
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-class User {
-    private Integer id;
-    private String name;
 }
