@@ -1,4 +1,4 @@
-package cn.atong.leek.kafka.api.producerConfig;
+package cn.atong.leek.kafka.api.config;
 
 import cn.atong.leek.kafka.api.KafkaConst;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
