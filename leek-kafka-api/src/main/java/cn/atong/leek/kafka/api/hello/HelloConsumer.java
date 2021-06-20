@@ -36,9 +36,9 @@ public class HelloConsumer {
             while (true) {
                 // 拉取消息
                 ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(500));
-                for (ConsumerRecord<String, String> recode : records) {
+                for (ConsumerRecord<String, String> record : records) {
                     System.out.println(String.format("topic:%s,分区：%d,偏移量：%d," + "key:%s,value:%s",
-                            recode.topic(), recode.partition(), recode.offset(), recode.key(), recode.value()));
+                            record.topic(), record.partition(), record.offset(), record.key(), record.value()));
                 }
             }
         }finally {
