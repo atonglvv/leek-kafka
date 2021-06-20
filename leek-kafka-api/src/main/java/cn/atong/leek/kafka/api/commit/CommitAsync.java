@@ -1,23 +1,22 @@
 package cn.atong.leek.kafka.api.commit;
 
 import cn.atong.leek.kafka.api.KafkaConst;
-import org.apache.kafka.clients.consumer.ConsumerConfig;
-import org.apache.kafka.clients.consumer.ConsumerRecord;
-import org.apache.kafka.clients.consumer.ConsumerRecords;
-import org.apache.kafka.clients.consumer.KafkaConsumer;
+import org.apache.kafka.clients.consumer.*;
+import org.apache.kafka.common.TopicPartition;
 import org.apache.kafka.common.serialization.StringDeserializer;
 
 import java.time.Duration;
 import java.util.Collections;
+import java.util.Map;
 import java.util.Properties;
 
 /**
  * @program: leek-kafka
- * @description: 手动提交-同步提交
+ * @description: 手动提交-异步提交
  * @author: atong
- * @create: 2021-06-20 14:54
+ * @create: 2021-06-20 15:29
  */
-public class CommitSync {
+public class CommitAsync {
     public static void main(String[] args) {
         //消费者
         Properties properties =
@@ -38,8 +37,19 @@ public class CommitSync {
                             record.topic(), record.partition(), record.offset(), record.key(), record.value()));
                     //do business
                 }
-                //同步提交（会阻塞）
-                consumer.commitSync();
+                //异步提交
+                consumer.commitAsync();
+                //允许回调的异步提交
+                consumer.commitAsync(new OffsetCommitCallback() {
+                    @Override
+                    public void onComplete(Map<TopicPartition, OffsetAndMetadata> offsets, Exception e) {
+                        if (null != e) {
+                            System.out.println("Commit failed for offsets");
+                            System.out.println(offsets);
+                            e.printStackTrace();
+                        }
+                    }
+                });
             }
         }finally {
             consumer.close();
