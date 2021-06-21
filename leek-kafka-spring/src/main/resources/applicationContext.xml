@@ -20,6 +20,10 @@
         <constructor-arg>
             <map>
                 <entry key="bootstrap.servers" value="localhost:9092" />
+                <entry key="retries" value="1" />
+                <entry key="batch.size" value="16384" />
+                <entry key="linger.ms" value="1" />
+                <entry key="buffer.memory" value="33554432" />
                 <entry key="key.serializer" value="org.apache.kafka.common.serialization.StringSerializer" />
                 <entry key="value.serializer" value="org.apache.kafka.common.serialization.StringSerializer" />
             </map>
@@ -33,6 +37,19 @@
             <ref bean="producerProperties"/>
         </constructor-arg>
     </bean>
+
+    <!--发送监听器bean -->
+    <bean id="sendListener" class="cn.atong.leek.kafka.spring.listener.KafkaProducerListener"/>
+
+
+    <!-- 创建 kafkaTemplate bean，使用的时候，只需要注入这个bean,即可使用template的send消息方法 -->
+    <bean id="kafkaTemplate" class="org.springframework.kafka.core.KafkaTemplate">
+        <constructor-arg ref="producerFactory" />
+        <constructor-arg name="autoFlush" value="true" />
+        <!--配置发送监听器bean-->
+        <property name="producerListener" ref="sendListener"></property>
+    </bean>
+
 
 
 </beans>
